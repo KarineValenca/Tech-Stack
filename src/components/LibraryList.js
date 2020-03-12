@@ -1,14 +1,11 @@
-import React, { useContext, useEffect } from 'react'
+import React from 'react'
 import { Text } from 'react-native'
-import { Context } from '../context/LibraryContext'
+//import { Context } from '../context/LibraryContext'
+import useResults from '../hooks/useResults'
 
 const LibraryList = () => {
-    const { state, loadData } = useContext(Context)
-
-    useEffect(() => {
-        loadData()
-        console.log(state)
-    }, [])
+    const [listLibraries, results] = useResults()
+    console.log(results)
 
     return (
         <Text>aaaa</Text>
