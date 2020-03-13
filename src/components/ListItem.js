@@ -1,14 +1,21 @@
-import React from 'react'
-import { Text,StyleSheet } from 'react-native'
+import React, { useContext, useEffect } from 'react'
+import { Text, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 import { CardSection } from './common'
-import detailResult from '../hooks/detailResult'
+import { Context } from '../context/LibraryContext'
 
 const ListItem = ({ library }) => {
-    
+    const { state, selectLibrary } = useContext(Context)
+
+    const { id, title } = library
+
     return (
-        <CardSection>
-            <Text style={styles.titleStyle}>{library.title}</Text>
-        </CardSection>
+        <TouchableWithoutFeedback onPress={() => selectLibrary(id)}>
+            <View>
+                <CardSection>
+                    <Text style={styles.titleStyle}>{title}</Text>
+                </CardSection>
+            </View>
+        </TouchableWithoutFeedback>
     )
 }
 
