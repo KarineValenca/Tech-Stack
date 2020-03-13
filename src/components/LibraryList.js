@@ -1,15 +1,29 @@
-import React from 'react'
-import { Text } from 'react-native'
-//import { Context } from '../context/LibraryContext'
-import useResults from '../hooks/useResults'
+import React, { useContext, useEffect } from 'react'
+import { FlatList, Text, View } from 'react-native'
+import ListItem from './ListItem'
+import { Context } from '../context/LibraryContext'
 
 const LibraryList = () => {
-    const [listLibraries, results] = useResults()
-    console.log(results)
+    const { state, loadData } = useContext(Context)
+
+    useEffect(() => {
+        loadData()
+        
+    }, [])
+
+    const renderLibrary = (library) => {
+        return <ListItem library={library}/>
+    }
 
     return (
-        <Text>aaaa</Text>
+        <FlatList
+            data={state.libraryList}
+            keyExtractor={(result) => result.id.toString()}
+            renderItem={({ item }) => renderLibrary(item)}
+        />
+
     )
+    
 }
 
 export default LibraryList
